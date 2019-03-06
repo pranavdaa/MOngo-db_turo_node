@@ -7,9 +7,9 @@ const config = {
 	views: 'views', 		// Set views directory
 	static: 'public', 		// Set static assets directory
 	db: { 					// Database configuration. Remember to set env variables in .env file: MONGODB_URI, PROD_MONGODB_URI
-	//	url: (process.env.TURBO_ENV == 'dev') ? process.env.MONGODB_URI : process.env.PROD_MONGODB_URI,
-url: 'mongodb://localhost/mongo-pro', //the last this in this is the nmae of our data base
-    type: 'mongo',
+	url: (process.env.TURBO_ENV == 'dev') ? process.env.MONGODB_URI : process.env.PROD_MONGODB_URI,
+//url: 'mongodb://localhost/mongo-pro', //this was first used
+	  type: 'mongo',
 		onError: (err) => {
 			console.log('DB Connection Failed!')
 		},
@@ -34,3 +34,14 @@ app.use('/api', api) // sample API Routes
 
 
 module.exports = app
+
+
+//this is what is inside .env file which is located on the main directory
+// TURBO_ENV=dev
+// TURBO_CDN=https://cdn.turbo360-vertex.com
+// SESSION_SECRET=YOUR_SESSION_SECRET
+// TURBO_APP_ID=<TURBO_APP_ID>
+// MONGODB_URI=mongodb://localhost/mongo-pro
+//
+// PROD_MONGODB_URI=mongodb://pranav_:pranav@123@ds133865.mlab.com:33865/pranav_
+//
