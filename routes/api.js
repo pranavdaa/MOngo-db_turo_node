@@ -46,6 +46,43 @@ const Profile = require('../models/Profile')
 
 //})
 //Way of quaring a specific record Note-> : says a specific id
+//handeling updates (in reality use a put insted of get)
+router.get('/profile/update',(req,res) =>{
+  const query = req.query //request id and as per the id update what ever else attribute we want like the name or age etc
+const profileId = query.id
+delete query['id']
+Profile.findByIdAndUpdate(profileId,query,{new:true})
+.then(profile =>{
+  res.json({
+    confirmation: 'sucess',
+    data: profile
+  })
+})
+
+.catch(err =>{
+  res.json({
+    confiramtion: 'fail',
+    message: err.message
+  })
+})
+})
+//this router is to remove a data from the database
+router.get('/profile/remove',(req,res) =>{
+  const query = req.query
+  Profile.findByIdAndRemove(query.id)
+  .then( data =>{
+    res.json({
+      confiramtion:'sucess',
+      data: 'Profile' +query.id+'Successfully removes'
+    })
+  })
+  .catch(err =>{
+    res.json({
+      confiramtion: 'fail',
+      data: err.message
+    })
+  })
+})
 router.get('/profile/:id', (req,res)=>{
 	const id = req.params.id //for taking a attribute from the data
 
