@@ -6,44 +6,74 @@ const router = vertex.router()
 const Profile = require('../models/Profile')
  router.get('/profile',(req,res) =>{
 	 //this is just for checking thayt the router is connected
-// 	res.json({
-// 	 confirmation:"sucess",
-// 	 data:"this is the profile endpoint"
-// 	})
+	res.json({
+	 confirmation:"sucess",
+	 data:"this is the profile endpoint"
+	})
+})
 //Quarin starts from here
-Method1->
-let filter = req.query
-if(req.query.age != null){
-	filter = {
-		age: {$gt: req.query.age}
-	}
-}
-Profile.find(filters)
-.then(profile =>{
-	res.json({
-		 confirmation:"sucess",
-		 data:profiles
+// Method1->
+// let filter = req.query
+// if(req.query.age != null){
+// 	filter = {
+// 		age: {$gt: req.query.age}
+// 	}
+// }
+// Profile.find(filters)
+// .then(profile =>{
+// 	res.json({
+// 		 confirmation:"sucess",
+// 		 data:profiles
+// 		})
+// })
+//
+// Method2->
+// const query = req.query
+// Profile.find(query) //to search a perticular data -> www.klvbjzbvjx/api/products?attribute_name=content_name
+// // Profile.find({age:{$get:40}}) -> by this we will get all the all the profiles with age greater then 40
+// .then(profiles =>{
+// 	res.json({
+// 		 confirmation:"sucess",
+// 		 data:profiles
+// 		})
+// })
+// .catch(err => {
+// 	res.json({
+// 		 confirmation:"fail",
+// 		 data:err
+// 		})
+// })
+
+//})
+//Way of quaring a specific record Note-> : says a specific id
+router.get('/profile/:id', (req,res)=>{
+	const id = req.params.id //for taking a attribute from the data
+
+	Profile.findById(id)
+	.then(profile =>{
+		res.json({
+			confiramtion:'sucess',
+			data: profile
 		})
+
+	})
+.catch(err =>{
+	res.json({
+		confiramtion: 'fail',
+		message: 'Profile' + id + 'not found'
+	})
 })
 
-Method2->
-const query = req.query
-Profile.find(query) //to search a perticular data -> www.klvbjzbvjx/api/products?attribute_name=content_name
-// Profile.find({age:{$get:40}}) -> by this we will get all the all the profiles with age greater then 40
-.then(profiles =>{
-	res.json({
-		 confirmation:"sucess",
-		 data:profiles
-		})
-})
-.catch(err => {
-	res.json({
-		 confirmation:"fail",
-		 data:err
-		})
 })
 
+router.post('/profile', (req,res) =>{
+  res.json({
+    confirmation: 'sucess',
+    data:req.body
+
+  })
 })
+
 
 
 module.exports = router
