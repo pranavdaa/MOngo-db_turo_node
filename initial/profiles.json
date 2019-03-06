@@ -1,0 +1,9 @@
+//this is how we will go the seeding(craeting some faulsey data) of the data
+
+{
+  "firstName":"tom",
+   "lastName":"brady",
+   "age":41,
+   "postion":"qb",
+   "team":"patriots"
+ }
